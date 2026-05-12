@@ -4,7 +4,7 @@
 
 namespace sld {
 
-    SLD_API u32
+    u32
     hash_u32(
         const void* data,
         const u32   size) {
@@ -17,7 +17,7 @@ namespace sld {
         return(hash.u32_0);
     }
 
-    SLD_API u64
+    u64
     hash_u64(
         const void* data,
         const u32   size) {
@@ -30,7 +30,7 @@ namespace sld {
         return(hash.u64_0);
     }
 
-    SLD_API u128
+    u128
     hash_u128(
         const void* data,
         const u32   size) {
@@ -43,7 +43,7 @@ namespace sld {
         return(hash);
     }
 
-    SLD_API bool
+    bool
     hash_is_equal(
         const void* data_a,
         const void* data_b,
