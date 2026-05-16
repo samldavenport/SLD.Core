@@ -169,9 +169,41 @@ namespace sld {
     };
 
     //--------------------------------------------------------------------
-    // BITWISE LOGIC
+    // HELPERS
     //--------------------------------------------------------------------
 
+    SLD_API_UTILITY void
+    swap_u16(u16& a, u16& b) {
+        u16 tmp = a;
+        a = b;
+        b = tmp;
+    }
+    
+    SLD_API_UTILITY void
+    swap_u32(u32& a, u32& b) {
+        u32 tmp = a;
+        a = b;
+        b = tmp;
+    }
+    
+    SLD_API_UTILITY void
+    swap_u64(u64& a, u64& b) {
+        u64 tmp = a;
+        a = b;
+        b = tmp;
+    }
+
+    SLD_API_INLINE void
+    zero_memory(
+        void* mem,
+        u64   size) {
+        
+        memset(mem, 0, size);
+    }    
+
+    //--------------------------------------------------------------------
+    // BITWISE LOGIC
+    //--------------------------------------------------------------------
 
     SLD_API_UTILITY u32  bit_value     (const u32 bit)                       { return (1 << bit);                                            }
     SLD_API_UTILITY bool bit_test      (const u32 value, const u32 bit)      { return ((value >> bit) & 1);                                  }
