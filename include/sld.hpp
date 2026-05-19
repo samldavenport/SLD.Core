@@ -221,6 +221,14 @@ namespace sld {
     }    
 
     //--------------------------------------------------------------------
+    // SIZING
+    //--------------------------------------------------------------------
+
+    SLD_API_UTILITY u32 size_kilobytes(const u32 num_kb) { return(num_kb * 1024);               }
+    SLD_API_UTILITY u32 size_megabytes(const u32 num_mb) { return(num_mb * 1024 * 1024);        }
+    SLD_API_UTILITY u32 size_gigabytes(const u32 num_gb) { return(num_gb * 1024 * 1024 * 1024); }
+
+    //--------------------------------------------------------------------
     // BITWISE LOGIC
     //--------------------------------------------------------------------
 
