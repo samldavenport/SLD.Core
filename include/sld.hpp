@@ -13,7 +13,7 @@
 #   define SLD_API __declspec(dllimport)
 #endif
 
-#define SLD_API_INLINE  static inline
+#define SLD_API_INLINE  inline
 #define SLD_API_UTILITY static constexpr
 
 #if _MSC_VER
@@ -48,9 +48,9 @@ namespace sld {
     typedef double   f64;
 
     // simd
-    typedef __m128i  simd_4xu32;
-    typedef __m128d  simd_2xf64;
-    typedef __m128   simd_4xf32;
+    typedef __m128i  simd_4u32;
+    typedef __m128d  simd_2f64;
+    typedef __m128   simd_4f32;
 
     // booleans
     typedef u8       b8;
@@ -64,7 +64,7 @@ namespace sld {
 
     // memory
     typedef u8       byte;
-    typedef vptr     void*;
+    typedef void*    vptr;
     typedef intptr_t addr;
     typedef u32      index;
     typedef void     element;
@@ -108,8 +108,18 @@ namespace sld {
             };
             u64        val64[2];
             u32        val32[4];
-            simd_4xu32 simd_reg;
+            simd_4u32 simd_reg;
         };
+
+        
+        SLD_API_INLINE u128() = default;
+        SLD_API_INLINE u128(simd_4u32 reg) : simd_reg(reg) { }
+
+        SLD_API_INLINE u128&
+        operator=(simd_4u32 reg) {
+            this->simd_reg = reg;
+            return(*this);
+        }
     };
 
     struct alignas(16) f128 {
@@ -124,10 +134,19 @@ namespace sld {
                 f64 u64_lo;
                 f64 u64_hi;
             };
-            f64         val64[2];
-            f32         val32[4];
-            simd_4xuf32 simd_reg;
+            f64       val64[2];
+            f32       val32[4];
+            simd_4f32 simd_reg;
         };
+
+        SLD_API_INLINE f128() = default;
+        SLD_API_INLINE f128(simd_4f32 reg) : simd_reg(reg) { }
+
+        SLD_API_INLINE f128&
+        operator=(simd_4f32 reg) {
+            this->simd_reg = reg;
+            return(*this);
+        }
     };
 
     //--------------------------------------------------------------------
@@ -205,29 +224,29 @@ namespace sld {
     // BITWISE LOGIC
     //--------------------------------------------------------------------
 
-    SLD_API_UTILITY u32  bit_value     (const u32 bit)                       { return (1 << bit);                                            }
-    SLD_API_UTILITY bool bit_test      (const u32 value, const u32 bit)      { return ((value >> bit) & 1);                                  }
-    SLD_API_UTILITY void bit_on        (u32&      value, const u32 bit)      { value |=  (1 << bit);                                         }
-    SLD_API_UTILITY void bit_off       (u32&      value, const u32 bit)      { value &= ~(1 << bit);                                         }
-    SLD_API_UTILITY void bit_toggle    (u32&      value, const u32 bit)      { value ^=  (1 << bit);                                         }
-    SLD_API_UTILITY bool bit_mask_test (const u32 value, const u32 mask)     { return((value & mask) > 0);                                   }
-    SLD_API_UTILITY void bit_mask_or   (u32&      value, const u32 mask)     { (value |=  mask);                                             }
-    SLD_API_UTILITY void bit_mask_and  (u32&      value, const u32 mask)     { (value &=  mask);                                             }
-    SLD_API_UTILITY void bit_mask_off  (u32&      value, const u32 mask)     { (value &= ~mask);                                             }
+    SLD_API_UTILITY u32  bit_value     (const u32 bit)                       { return (1 << bit);           }
+    SLD_API_UTILITY bool bit_test      (const u32 value, const u32 bit)      { return ((value >> bit) & 1); }
+    SLD_API_UTILITY void bit_on        (u32&      value, const u32 bit)      { value |=  (1 << bit);        }
+    SLD_API_UTILITY void bit_off       (u32&      value, const u32 bit)      { value &= ~(1 << bit);        }
+    SLD_API_UTILITY void bit_toggle    (u32&      value, const u32 bit)      { value ^=  (1 << bit);        }
+    SLD_API_UTILITY bool bit_mask_test (const u32 value, const u32 mask)     { return((value & mask) > 0);  }
+    SLD_API_UTILITY void bit_mask_or   (u32&      value, const u32 mask)     { (value |=  mask);            }
+    SLD_API_UTILITY void bit_mask_and  (u32&      value, const u32 mask)     { (value &=  mask);            }
+    SLD_API_UTILITY void bit_mask_off  (u32&      value, const u32 mask)     { (value &= ~mask);            }
 
     //--------------------------------------------------------------------
     // SIMD
     //--------------------------------------------------------------------
 
-    SLD_API_UTILITY f128 simd_u128_a_add_b  (u128& reg_a, const u128& reg_b) { return(_mm_add_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
-    SLD_API_UTILITY f128 simd_u128_a_sub_b  (u128& reg_a, const u128& reg_b) { return(_mm_sub_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
-    SLD_API_UTILITY f128 simd_u128_a_mul_b  (u128& reg_a, const u128& reg_b) { return(_mm_mul_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
-    SLD_API_UTILITY f128 simd_u128_a_div_b  (u128& reg_a, const u128& reg_b) { return(_mm_div_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
+    SLD_API_INLINE u128 simd_u128_a_add_b  (u128& reg_a, const u128& reg_b) { return(_mm_add_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
+    SLD_API_INLINE u128 simd_u128_a_sub_b  (u128& reg_a, const u128& reg_b) { return(_mm_sub_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
+    SLD_API_INLINE u128 simd_u128_a_mul_b  (u128& reg_a, const u128& reg_b) { return(_mm_mul_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
+    SLD_API_INLINE u128 simd_u128_a_div_b  (u128& reg_a, const u128& reg_b) { return(_mm_div_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
     
-    SLD_API_UTILITY f128 simd_f128_a_add_b  (f128& reg_a, const u128& reg_b) { return(_mm_add_ps (reg_a.simd_reg, reg_b.simd_reg));   }
-    SLD_API_UTILITY f128 simd_f128_a_sub_b  (f128& reg_a, const u128& reg_b) { return(_mm_sub_ps (reg_a.simd_reg, reg_b.simd_reg));   }
-    SLD_API_UTILITY f128 simd_f128_a_mul_b  (f128& reg_a, const u128& reg_b) { return(_mm_mul_ps (reg_a.simd_reg, reg_b.simd_reg));   }
-    SLD_API_UTILITY f128 simd_f128_a_div_b  (f128& reg_a, const u128& reg_b) { return(_mm_div_ps (reg_a.simd_reg, reg_b.simd_reg));   }
+    SLD_API_INLINE f128 simd_f128_a_add_b  (f128& reg_a, const f128& reg_b) { return(_mm_add_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+    SLD_API_INLINE f128 simd_f128_a_sub_b  (f128& reg_a, const f128& reg_b) { return(_mm_sub_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+    SLD_API_INLINE f128 simd_f128_a_mul_b  (f128& reg_a, const f128& reg_b) { return(_mm_mul_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+    SLD_API_INLINE f128 simd_f128_a_div_b  (f128& reg_a, const f128& reg_b) { return(_mm_div_ps(reg_a.simd_reg, reg_b.simd_reg));    }
 
     //--------------------------------------------------------------------
     // HASHING
