@@ -156,10 +156,10 @@ namespace sld {
     struct color_rgba_u32 {
         union {
             struct {
-                u32 r;
-                u32 g;
-                u32 b;
-                u32 a;
+                byte a;
+                byte b;
+                byte g;
+                byte r;
             };
             u32 hex;
         };
