@@ -161,7 +161,7 @@ namespace sld {
                 u32 b;
                 u32 a;
             };
-            u32 val;
+            u32 hex;
         };
     };
 
