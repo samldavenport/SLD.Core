@@ -163,6 +163,15 @@ namespace sld {
             };
             u32 hex;
         };
+
+        SLD_API_INLINE color_rgba_u32() = default;
+        SLD_API_INLINE color_rgba_u32(u32 hex_val) : hex(hex_val)  { }
+
+        SLD_API_INLINE color_rgba_u32&
+        operator=(u32 hex_val) {
+            this->hex = hex_val;
+            return(*this);
+        }
     };
 
     struct color_rgba_f32 {
