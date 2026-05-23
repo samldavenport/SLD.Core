@@ -110,7 +110,6 @@ namespace sld {
             u32        val32[4];
             simd_4u32 simd_reg;
         };
-
         
         SLD_API_INLINE u128() = default;
         SLD_API_INLINE u128(simd_4u32 reg) : simd_reg(reg) { }
