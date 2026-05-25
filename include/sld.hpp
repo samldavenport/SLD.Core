@@ -242,6 +242,8 @@ namespace sld {
 
     SLD_API_UTILITY u32  bit_value     (const u32 bit)                       { return (1 << bit);           }
     SLD_API_UTILITY bool bit_test      (const u32 value, const u32 bit)      { return ((value >> bit) & 1); }
+    SLD_API_UTILITY bool bit_mask_all  (const u32 value, const u32 mask)     { return ((value & mask) > 0); }
+    SLD_API_UTILITY bool bit_mask_any  (const u32 value, const u32 mask)     { return ((value | mask) > 0); }
     SLD_API_UTILITY void bit_on        (u32&      value, const u32 bit)      { value |=  (1 << bit);        }
     SLD_API_UTILITY void bit_off       (u32&      value, const u32 bit)      { value &= ~(1 << bit);        }
     SLD_API_UTILITY void bit_toggle    (u32&      value, const u32 bit)      { value ^=  (1 << bit);        }
