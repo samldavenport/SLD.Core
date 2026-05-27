@@ -4,9 +4,9 @@
 
 namespace sld {
 
-    u32
+    SLD_API u32
     hash_u32(
-        const void* data,
+        void* data,
         const u32   size) {
 
         assert(data != NULL && size != 0);
@@ -17,9 +17,9 @@ namespace sld {
         return(hash.u32_0);
     }
 
-    u64
+    SLD_API u64
     hash_u64(
-        const void* data,
+        void* data,
         const u32   size) {
 
         assert(data != NULL && size != 0);
@@ -27,12 +27,12 @@ namespace sld {
         u128 hash;
         hash.simd_reg = MeowHash(MeowDefaultSeed, size, data);
 
-        return(hash.u64_0);
+        return(hash.u64_lo);
     }
 
-    u128
+    SLD_API u128
     hash_u128(
-        const void* data,
+        void* data,
         const u32   size) {
 
         assert(data != NULL && size != 0);
@@ -43,10 +43,10 @@ namespace sld {
         return(hash);
     }
 
-    bool
+    SLD_API bool
     hash_is_equal(
-        const void* data_a,
-        const void* data_b,
+        void* data_a,
+        void* data_b,
         const u32   size) {
 
         assert(
@@ -62,7 +62,7 @@ namespace sld {
 
         const bool is_equal = (
             hash_a.u64_lo == hash_b.u64_lo &&
-            hash_a.u64_hi == hash_b.u64_hi &&
+            hash_a.u64_hi == hash_b.u64_hi
         );
 
         return(is_equal);

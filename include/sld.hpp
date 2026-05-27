@@ -270,10 +270,10 @@ namespace sld {
     // HASHING
     //--------------------------------------------------------------------
 
-    SLD_API u32  hash_u32      (const void* data,   const u32   size);
-    SLD_API u64  hash_u64      (const void* data,   const u32   size);
-    SLD_API u128 hash_u128     (const void* data,   const u32   size);
-    SLD_API bool hash_is_equal (const void* data_a, const void* data_b, const u32 size);
+    SLD_API u32  hash_u32      (void* data,   const u32   size);
+    SLD_API u64  hash_u64      (void* data,   const u32   size);
+    SLD_API u128 hash_u128     (void* data,   const u32   size);
+    SLD_API bool hash_is_equal (void* data_a, void* data_b, const u32 size);
 
 };
 
