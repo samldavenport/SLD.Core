@@ -178,6 +178,25 @@ namespace sld {
         f32 g;
         f32 b;
         f32 a;
+
+        SLD_API_INLINE color_rgba_f32() = default;
+
+        SLD_API_INLINE
+        color_rgba_f32(
+            const u32 hex_Val) {
+
+            const f32  normal_factor = (1.0f / 255.0f);
+            const byte r             = (hex_Val >> 24) & 0xFF;
+            const byte g             = (hex_Val >> 16) & 0xFF;
+            const byte b             = (hex_Val >> 8)  & 0xFF;
+            const byte a             =  hex_Val        & 0xFF;
+
+            this->r = normal_factor * (f32)r;
+            this->g = normal_factor * (f32)g;
+            this->b = normal_factor * (f32)b;
+            this->a = normal_factor * (f32)a;            
+        }
+
     };
 
     struct size {
