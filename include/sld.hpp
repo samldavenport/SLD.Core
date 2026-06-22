@@ -259,18 +259,28 @@ namespace sld {
     // BITWISE LOGIC
     //--------------------------------------------------------------------
 
-    SLD_API_UTILITY u32  bit_value     (const u32 bit)                       { return (1 << bit);           }
-    SLD_API_UTILITY bool bit_test      (const u32 value, const u32 bit)      { return ((value >> bit) & 1); }
-    SLD_API_UTILITY bool bit_mask_all  (const u32 value, const u32 mask)     { return ((value & mask) > 0); }
-    SLD_API_UTILITY bool bit_mask_any  (const u32 value, const u32 mask)     { return ((value | mask) > 0); }
-    SLD_API_UTILITY void bit_on        (u32&      value, const u32 bit)      { value |=  (1 << bit);        }
-    SLD_API_UTILITY void bit_off       (u32&      value, const u32 bit)      { value &= ~(1 << bit);        }
-    SLD_API_UTILITY void bit_toggle    (u32&      value, const u32 bit)      { value ^=  (1 << bit);        }
-    SLD_API_UTILITY bool bit_mask_test (const u32 value, const u32 mask)     { return((value & mask) > 0);  }
-    SLD_API_UTILITY void bit_mask_or   (u32&      value, const u32 mask)     { (value |=  mask);            }
-    SLD_API_UTILITY void bit_mask_and  (u32&      value, const u32 mask)     { (value &=  mask);            }
-    SLD_API_UTILITY void bit_mask_off  (u32&      value, const u32 mask)     { (value &= ~mask);            }
+    SLD_API_UTILITY u32  bit_value     (const u32 bit)                        { return (1 << bit);           }
+    SLD_API_UTILITY bool bit_test      (const u32 value, const u32 bit)       { return ((value >> bit) & 1); }
+    SLD_API_UTILITY bool bit_mask_all  (const u32 value, const u32 mask)      { return ((value & mask) > 0); }
+    SLD_API_UTILITY bool bit_mask_any  (const u32 value, const u32 mask)      { return ((value | mask) > 0); }
+    SLD_API_UTILITY void bit_on        (u32&      value, const u32 bit)       { value |=  (1 << bit);        }
+    SLD_API_UTILITY void bit_off       (u32&      value, const u32 bit)       { value &= ~(1 << bit);        }
+    SLD_API_UTILITY void bit_toggle    (u32&      value, const u32 bit)       { value ^=  (1 << bit);        }
+    SLD_API_UTILITY bool bit_mask_test (const u32 value, const u32 mask)      { return((value & mask) > 0);  }
+    SLD_API_UTILITY void bit_mask_or   (u32&      value, const u32 mask)      { (value |=  mask);            }
+    SLD_API_UTILITY void bit_mask_and  (u32&      value, const u32 mask)      { (value &=  mask);            }
+    SLD_API_UTILITY void bit_mask_off  (u32&      value, const u32 mask)      { (value &= ~mask);            }
 
+    SLD_API_UTILITY void
+    bit_set(
+        u32&      value,
+        const u32 bit,
+        bool      b) {
+    
+        if (b) bit_on  (value, bit);
+        else   bit_off (value, bit);
+    }
+ 
     //--------------------------------------------------------------------
     // SIMD
     //--------------------------------------------------------------------
