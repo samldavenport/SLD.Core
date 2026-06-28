@@ -247,6 +247,17 @@ namespace sld {
         memset(mem, 0, size);
     }    
 
+    SLD_API_INLINE void
+    zero_memory(
+        memory& mem) {
+        
+        memset(
+            mem.ptr,
+            0,
+            mem.size
+        );
+    }    
+
     //--------------------------------------------------------------------
     // SIZING
     //--------------------------------------------------------------------
