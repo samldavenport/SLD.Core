@@ -59,8 +59,8 @@ namespace sld {
     typedef u64      b64;
 
     // characters
-    typedef char     cchar8;
-    typedef wchar_t  wchar16;
+    typedef char     cchar;
+    typedef wchar_t  wchar;
 
     // memory
     typedef u8       byte;
