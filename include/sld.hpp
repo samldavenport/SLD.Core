@@ -70,14 +70,7 @@ namespace sld {
     typedef void     element;
     typedef void     key;
     typedef void     value;
-
-    // handles
-    typedef u8       h8;
-    typedef u16      h16;
-    typedef u32      h32;
-    typedef u64      h64;
-
-
+    
     //--------------------------------------------------------------------
     // MEMORY
     //--------------------------------------------------------------------
