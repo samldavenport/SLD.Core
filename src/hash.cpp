@@ -6,8 +6,8 @@ namespace sld {
 
     SLD_API u32
     hash_u32(
-        void* data,
-        const u32   size) {
+        void*     data,
+        const u32 size) {
 
         assert(data != NULL && size != 0);
 
