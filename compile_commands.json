@@ -1,0 +1,5 @@
+{
+  "directory": ".\\",
+  "command": "cl.exe .\\src\\sld.cpp /Fo:build\\debug\\obj\\SLD.Core.obj /Isrc /Iinclude /I3rd-party /nologo /c /MD /Z7 /EHs- /std:c++17 /Od /D_HAS_EXCEPTIONS=0",
+  "file": ".\\src\\sld.cpp"
+}
