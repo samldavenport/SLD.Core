@@ -1,5 +1,7 @@
-{
-  "directory": ".\\",
-  "command": "cl.exe .\\src\\sld.cpp /Fo:build\\debug\\obj\\SLD.Core.obj /Isrc /Iinclude /I3rd-party /nologo /c /MD /Z7 /EHs- /std:c++17 /Od /D_HAS_EXCEPTIONS=0",
-  "file": ".\\src\\sld.cpp"
-}
+[
+  {
+    "directory": "C:\\Users\\sldav\\source\\repos\\SLD.Core",
+    "command": "cl.exe C:\\Users\\sldav\\source\\repos\\SLD.Core\\src\\sld.cpp /Fo:C:\\Users\\sldav\\source\\repos\\SLD.Core\\build\\debug\\obj\\SLD.Core.obj /IC:\\Users\\sldav\\source\\repos\\SLD.Core\\src /IC:\\Users\\sldav\\source\\repos\\SLD.Core\\include /IC:\\Users\\sldav\\source\\repos\\SLD.Core\\3rd-party /nologo /c /MD /Z7 /EHs- /std:c++17 /Od /D_HAS_EXCEPTIONS=0 /DSLD_DLL_EXPORT",
+    "file": "C:\\Users\\sldav\\source\\repos\\SLD.Core\\src\\sld.cpp"
+  }
+]

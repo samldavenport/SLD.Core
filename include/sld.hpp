@@ -298,7 +298,6 @@ namespace sld {
     SLD_API_INLINE u128 simd_u128_a_add_b  (u128& reg_a, const u128& reg_b) { return(_mm_add_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
     SLD_API_INLINE u128 simd_u128_a_sub_b  (u128& reg_a, const u128& reg_b) { return(_mm_sub_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
     SLD_API_INLINE u128 simd_u128_a_mul_b  (u128& reg_a, const u128& reg_b) { return(_mm_mul_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
-    SLD_API_INLINE u128 simd_u128_a_div_b  (u128& reg_a, const u128& reg_b) { return(_mm_div_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
     
     SLD_API_INLINE f128 simd_f128_a_add_b  (f128& reg_a, const f128& reg_b) { return(_mm_add_ps(reg_a.simd_reg, reg_b.simd_reg));    }
     SLD_API_INLINE f128 simd_f128_a_sub_b  (f128& reg_a, const f128& reg_b) { return(_mm_sub_ps(reg_a.simd_reg, reg_b.simd_reg));    }
