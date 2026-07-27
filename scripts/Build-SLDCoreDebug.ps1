@@ -1,3 +1,6 @@
+$ProjectRoot = Split-Path -Parent $PSScriptRoot 
+
+Push-Location $ProjectRoot
 $OutDirs = [PSCustomObject]@{
     Bin = "build\debug\bin"
     Obj = "build\debug\obj"
@@ -86,3 +89,4 @@ $CompileCommands = [PSCustomObject]@{
 
 $CompileCommands | ConvertTo-Json -Depth 20 | Set-Content -Path "compile_commands.json"
 
+Pop-Location
