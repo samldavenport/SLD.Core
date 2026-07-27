@@ -1,0 +1,7 @@
+build/debug/bin/SLD.Core.dll
+build/debug/bin/SLD.Core.ilk
+build/debug/bin/SLD.Core.pdb
+build/debug/lib/SLD.Core.exp
+build/debug/lib/SLD.Core.lib
+build/debug/obj/SLD.Core.obj
+compile_commands.json
