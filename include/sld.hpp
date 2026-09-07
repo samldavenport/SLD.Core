@@ -261,9 +261,12 @@ namespace sld {
     // SIZING
     //--------------------------------------------------------------------
 
-    SLD_API_UTILITY u64 size_kilobytes(const u64 num_kb) { return(num_kb * 1024);               }
-    SLD_API_UTILITY u64 size_megabytes(const u64 num_mb) { return(num_mb * 1024 * 1024);        }
-    SLD_API_UTILITY u64 size_gigabytes(const u64 num_gb) { return(num_gb * 1024 * 1024 * 1024); }
+    SLD_API_UTILITY u64  size_kilobytes   (const u64 num_kb)                { return(num_kb * 1024);                        }
+    SLD_API_UTILITY u64  size_megabytes   (const u64 num_mb)                { return(num_mb * 1024 * 1024);                 }
+    SLD_API_UTILITY u64  size_gigabytes   (const u64 num_gb)                { return(num_gb * 1024 * 1024 * 1024);          }
+    SLD_API_UTILITY u64  size_align       (const u64 size, const u64 align) { return((size + align - 1) / align * align);   }
+    SLD_API_UTILITY u64  size_align_pow_2 (const u64 size, const u64 align) { return((size + align - 1) & ~(align - 1));    }
+    SLD_API_UTILITY bool size_is_pow_2    (const u64 size)                  { return(size > 0 && (size & (size - 1)) == 0); }
 
     //--------------------------------------------------------------------
     // BITWISE LOGIC
