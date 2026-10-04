@@ -1,10 +1,26 @@
 param(
     [ValidateSet("Debug", "Release")]
-    [string]$Config = "Debug"
+    [string]$Config = "Debug",
+
+    # remove all generated files instead of building
+    [switch]$Clean
 )
 
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
 $Preset      = $Config.ToLower()
+
+if ($Clean) {
+    $Generated = @(
+        Join-Path $ProjectRoot "build"
+        Join-Path $ProjectRoot "compile_commands.json"
+    )
+    foreach ($Path in $Generated) {
+        if (Test-Path $Path) {
+            Remove-Item $Path -Recurse -Force
+        }
+    }
+    return
+}
 
 # the cmake presets locate the vcpkg toolchain through VCPKG_ROOT
 if (-not $env:VCPKG_ROOT) {
