@@ -81,12 +81,13 @@ $null = New-Item -ItemType Directory -Path $OutDirs.Lib -Force
 Invoke-Expression $Expressions.Compile
 Invoke-Expression $Expressions.Link
 
-$CompileCommands = [PSCustomObject]@{
-    directory = ".\"
+$CompileCommands  = @()
+$CompileCommands += [PSCustomObject]@{
+    directory = $ProjectRoot
     command   = $Expressions.Compile
-    file      = ".\src\sld.cpp" 
+    file      = Join-Path $ProjectRoot "src\sld.cpp"
 }
 
-$CompileCommands | ConvertTo-Json -Depth 20 | Set-Content -Path "compile_commands.json"
+ConvertTo-Json -InputObject $CompileCommands -Depth 20 | Set-Content -Path "compile_commands.json"
 
 Pop-Location
