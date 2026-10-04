@@ -274,8 +274,8 @@ namespace sld {
 
     SLD_API_UTILITY u32  bit_value     (const u32 bit)                        { return (1 << bit);           }
     SLD_API_UTILITY bool bit_test      (const u32 value, const u32 bit)       { return ((value >> bit) & 1); }
-    SLD_API_UTILITY bool bit_mask_all  (const u32 value, const u32 mask)      { return ((value & mask) > 0); }
-    SLD_API_UTILITY bool bit_mask_any  (const u32 value, const u32 mask)      { return ((value | mask) > 0); }
+    SLD_API_UTILITY bool bit_mask_all  (const u32 value, const u32 mask)      { return ((value & mask) == mask); }
+    SLD_API_UTILITY bool bit_mask_any  (const u32 value, const u32 mask)      { return ((value & mask) != 0);    }
     SLD_API_UTILITY void bit_on        (u32&      value, const u32 bit)       { value |=  (1 << bit);        }
     SLD_API_UTILITY void bit_off       (u32&      value, const u32 bit)       { value &= ~(1 << bit);        }
     SLD_API_UTILITY void bit_toggle    (u32&      value, const u32 bit)       { value ^=  (1 << bit);        }
@@ -300,7 +300,7 @@ namespace sld {
 
     SLD_API_INLINE u128 simd_u128_a_add_b  (u128& reg_a, const u128& reg_b) { return(_mm_add_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
     SLD_API_INLINE u128 simd_u128_a_sub_b  (u128& reg_a, const u128& reg_b) { return(_mm_sub_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
-    SLD_API_INLINE u128 simd_u128_a_mul_b  (u128& reg_a, const u128& reg_b) { return(_mm_mul_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
+    SLD_API_INLINE u128 simd_u128_a_mul_b  (u128& reg_a, const u128& reg_b) { return(_mm_mullo_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
     
     SLD_API_INLINE f128 simd_f128_a_add_b  (f128& reg_a, const f128& reg_b) { return(_mm_add_ps(reg_a.simd_reg, reg_b.simd_reg));    }
     SLD_API_INLINE f128 simd_f128_a_sub_b  (f128& reg_a, const f128& reg_b) { return(_mm_sub_ps(reg_a.simd_reg, reg_b.simd_reg));    }
@@ -345,8 +345,8 @@ namespace sld {
     SLD_API_INLINE bool operator!= (const u32 val,  const strong_u32 s_u32)  { return(val != s_u32.val); }
     SLD_API_INLINE u32  operator&  (const u32 mask, const strong_u32 s_u32)  { return(mask & s_u32.val); }
     SLD_API_INLINE u32  operator|  (const u32 mask, const strong_u32 s_u32)  { return(mask | s_u32.val); }
-    SLD_API_INLINE void operator&= (u32 mask, const strong_u32 s_u32)        { mask &= s_u32.val;        }
-    SLD_API_INLINE void operator|= (u32 mask, const strong_u32 s_u32)        { mask |= s_u32.val;        }
+    SLD_API_INLINE void operator&= (u32& mask, const strong_u32 s_u32)       { mask &= s_u32.val;        }
+    SLD_API_INLINE void operator|= (u32& mask, const strong_u32 s_u32)       { mask |= s_u32.val;        }
 
 };
 
