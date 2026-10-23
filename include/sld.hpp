@@ -319,6 +319,7 @@ namespace sld {
     //--------------------------------------------------------------------
     // STRONG TYPES
     //--------------------------------------------------------------------
+
     struct strong_u32 {
 
         u32 val;
@@ -348,6 +349,63 @@ namespace sld {
     SLD_API_INLINE void operator&= (u32& mask, const strong_u32 s_u32)       { mask &= s_u32.val;        }
     SLD_API_INLINE void operator|= (u32& mask, const strong_u32 s_u32)       { mask |= s_u32.val;        }
 
+    struct strong_u16 {
+
+        u16 val;
+
+        strong_u16() = default;
+        strong_u16(u16 val) : val(val) { }
+
+        SLD_API_INLINE bool operator== (const strong_u16& other) const { return(this->val == other.val); }
+        SLD_API_INLINE bool operator!= (const strong_u16& other) const { return(this->val != other.val); }
+        SLD_API_INLINE u16  operator&  (const strong_u16& other) const { return(this->val & other.val);  }
+        SLD_API_INLINE u16  operator|  (const strong_u16& other) const { return(this->val | other.val);  }
+        SLD_API_INLINE void operator&= (const strong_u16& other)       { this->val &= other.val;         }
+        SLD_API_INLINE void operator|= (const strong_u16& other)       { this->val |= other.val;         }
+
+        SLD_API_INLINE bool operator== (const u16& val)          const { return(this->val == val);       }
+        SLD_API_INLINE bool operator!= (const u16& val)          const { return(this->val != val);       }
+        SLD_API_INLINE u16  operator&  (const u16 mask)          const { return(val & mask);             }
+        SLD_API_INLINE u16  operator|  (const u16 mask)          const { return(val | mask);             }
+        SLD_API_INLINE void operator&= (const u16 mask)                { val &= mask;                    }
+        SLD_API_INLINE void operator|= (const u16 mask)                { val |= mask;                    }
+    };
+    
+    SLD_API_INLINE bool operator== (const u16 val,  const strong_u16 s_u16)  { return(val == s_u16.val); }
+    SLD_API_INLINE bool operator!= (const u16 val,  const strong_u16 s_u16)  { return(val != s_u16.val); }
+    SLD_API_INLINE u16  operator&  (const u16 mask, const strong_u16 s_u16)  { return(mask & s_u16.val); }
+    SLD_API_INLINE u16  operator|  (const u16 mask, const strong_u16 s_u16)  { return(mask | s_u16.val); }
+    SLD_API_INLINE void operator&= (u16& mask,      const strong_u16 s_u16)  { mask &= s_u16.val;        }
+    SLD_API_INLINE void operator|= (u16& mask,      const strong_u16 s_u16)  { mask |= s_u16.val;        }
+    
+    struct strong_u8 {
+
+        u8 val;
+
+        strong_u8() = default;
+        strong_u8(u8 val) : val(val) { }
+
+        SLD_API_INLINE bool operator== (const strong_u8& other) const { return(this->val == other.val); }
+        SLD_API_INLINE bool operator!= (const strong_u8& other) const { return(this->val != other.val); }
+        SLD_API_INLINE u8   operator&  (const strong_u8& other) const { return(this->val & other.val);  }
+        SLD_API_INLINE u8   operator|  (const strong_u8& other) const { return(this->val | other.val);  }
+        SLD_API_INLINE void operator&= (const strong_u8& other)       { this->val &= other.val;         }
+        SLD_API_INLINE void operator|= (const strong_u8& other)       { this->val |= other.val;         }
+
+        SLD_API_INLINE bool operator== (const u8& val)          const { return(this->val == val);       }
+        SLD_API_INLINE bool operator!= (const u8& val)          const { return(this->val != val);       }
+        SLD_API_INLINE u8   operator&  (const u8 mask)          const { return(val & mask);             }
+        SLD_API_INLINE u8   operator|  (const u8 mask)          const { return(val | mask);             }
+        SLD_API_INLINE void operator&= (const u8 mask)                { val &= mask;                    }
+        SLD_API_INLINE void operator|= (const u8 mask)                { val |= mask;                    }
+    };
+    
+    SLD_API_INLINE bool operator== (const u8 val,  const strong_u8 s_u8)  { return(val == s_u8.val); }
+    SLD_API_INLINE bool operator!= (const u8 val,  const strong_u8 s_u8)  { return(val != s_u8.val); }
+    SLD_API_INLINE u8   operator&  (const u8 mask, const strong_u8 s_u8)  { return(mask & s_u8.val); }
+    SLD_API_INLINE u8   operator|  (const u8 mask, const strong_u8 s_u8)  { return(mask | s_u8.val); }
+    SLD_API_INLINE void operator&= (u8& mask,      const strong_u8 s_u8)  { mask &= s_u8.val;        }
+    SLD_API_INLINE void operator|= (u8& mask,      const strong_u8 s_u8)  { mask |= s_u8.val;        }
 };
 
 #endif //SLD_HPP
