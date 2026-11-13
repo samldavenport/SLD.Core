@@ -319,6 +319,19 @@ namespace sld {
     SLD_API_INLINE f128 simd_f128_set_all  (const f32 val)                        { return(_mm_set1_ps(val));                                 }
     SLD_API_INLINE f128 simd_f128_set      (const f32 f32_0, const f32 f32_1, const f32 f32_2, const f32 f32_3) { return(_mm_setr_ps(f32_0, f32_1, f32_2, f32_3)); }
 
+    // rounds toward 0, the same as a cast
+    SLD_API_INLINE u128 simd_f128_trunc_to_u128 (const f128& reg) { return(_mm_cvttps_epi32(reg.simd_reg)); }
+
+    // each lane clamped to 0-255 and packed into a byte, lane 0 is the low byte
+    SLD_API_INLINE u32
+    simd_u128_pack_u8(
+        const u128& reg) {
+
+        const simd_4u32 packed_16 = _mm_packs_epi32  (reg.simd_reg, reg.simd_reg);
+        const simd_4u32 packed_8  = _mm_packus_epi16 (packed_16,    packed_16);
+        return((u32)_mm_cvtsi128_si32(packed_8));
+    }
+
     //--------------------------------------------------------------------
     // HASHING
     //--------------------------------------------------------------------
