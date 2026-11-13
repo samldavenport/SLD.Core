@@ -302,10 +302,22 @@ namespace sld {
     SLD_API_INLINE u128 simd_u128_a_sub_b  (u128& reg_a, const u128& reg_b) { return(_mm_sub_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
     SLD_API_INLINE u128 simd_u128_a_mul_b  (u128& reg_a, const u128& reg_b) { return(_mm_mullo_epi32(reg_a.simd_reg, reg_b.simd_reg)); }
     
-    SLD_API_INLINE f128 simd_f128_a_add_b  (f128& reg_a, const f128& reg_b) { return(_mm_add_ps(reg_a.simd_reg, reg_b.simd_reg));    }
-    SLD_API_INLINE f128 simd_f128_a_sub_b  (f128& reg_a, const f128& reg_b) { return(_mm_sub_ps(reg_a.simd_reg, reg_b.simd_reg));    }
-    SLD_API_INLINE f128 simd_f128_a_mul_b  (f128& reg_a, const f128& reg_b) { return(_mm_mul_ps(reg_a.simd_reg, reg_b.simd_reg));    }
-    SLD_API_INLINE f128 simd_f128_a_div_b  (f128& reg_a, const f128& reg_b) { return(_mm_div_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+    SLD_API_INLINE f128 simd_f128_a_add_b  (const f128& reg_a, const f128& reg_b) { return(_mm_add_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+    SLD_API_INLINE f128 simd_f128_a_sub_b  (const f128& reg_a, const f128& reg_b) { return(_mm_sub_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+    SLD_API_INLINE f128 simd_f128_a_mul_b  (const f128& reg_a, const f128& reg_b) { return(_mm_mul_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+    SLD_API_INLINE f128 simd_f128_a_div_b  (const f128& reg_a, const f128& reg_b) { return(_mm_div_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+    SLD_API_INLINE f128 simd_f128_a_min_b  (const f128& reg_a, const f128& reg_b) { return(_mm_min_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+    SLD_API_INLINE f128 simd_f128_a_max_b  (const f128& reg_a, const f128& reg_b) { return(_mm_max_ps(reg_a.simd_reg, reg_b.simd_reg));    }
+
+    // a bit per lane, lane 0 is bit 0
+    SLD_API_INLINE u32  simd_f128_a_gt_b_mask (const f128& reg_a, const f128& reg_b) { return((u32)_mm_movemask_ps(_mm_cmpgt_ps(reg_a.simd_reg, reg_b.simd_reg))); }
+    SLD_API_INLINE u32  simd_f128_a_lt_b_mask (const f128& reg_a, const f128& reg_b) { return((u32)_mm_movemask_ps(_mm_cmplt_ps(reg_a.simd_reg, reg_b.simd_reg))); }
+
+    // the loads and stores don't need the memory to be aligned
+    SLD_API_INLINE f128 simd_f128_load     (const f32* src)                       { return(_mm_loadu_ps(src));                                }
+    SLD_API_INLINE void simd_f128_store    (f32* dst, const f128& reg)           { _mm_storeu_ps(dst, reg.simd_reg);                         }
+    SLD_API_INLINE f128 simd_f128_set_all  (const f32 val)                        { return(_mm_set1_ps(val));                                 }
+    SLD_API_INLINE f128 simd_f128_set      (const f32 f32_0, const f32 f32_1, const f32 f32_2, const f32 f32_3) { return(_mm_setr_ps(f32_0, f32_1, f32_2, f32_3)); }
 
     //--------------------------------------------------------------------
     // HASHING
